@@ -90,5 +90,8 @@ export const useCopyLink = () => {
     copyCurrentRawLink: (encodeAll?: boolean) => {
       copy(currentObjLink(encodeAll))
     },
+    rawLinksText: (encodeAll?: boolean) => {
+      return rawLinksText(encodeAll)
+    },
   }
 }

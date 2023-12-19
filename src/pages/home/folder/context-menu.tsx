@@ -4,7 +4,7 @@ import "solid-contextmenu/dist/style.css"
 import { HStack, Icon, Text, useColorMode, Image } from "@hope-ui/solid"
 import { operations } from "../toolbar/operations"
 import { For } from "solid-js"
-import { bus, convertURL, notify } from "~/utils"
+import { bus, convertURL, notify, ext } from "~/utils"
 import { ObjType, UserMethods, UserPermissions } from "~/types"
 import { getSettingBool, me } from "~/store"
 import { players } from "../previews/video_box"
@@ -28,7 +28,7 @@ const ItemContent = (props: { name: string }) => {
 export const ContextMenu = () => {
   const t = useT()
   const { colorMode } = useColorMode()
-  const { copySelectedRawLink, copySelectedPreviewPage } = useCopyLink()
+  const { copySelectedRawLink, copySelectedPreviewPage, rawLinksText } = useCopyLink()
   const { batchDownloadSelected } = useDownload()
   const canPackageDownload = () => {
     return UserMethods.is_admin(me()) || getSettingBool("package_download")
@@ -80,6 +80,18 @@ export const ContextMenu = () => {
         }}
       >
         <ItemContent name="download" />
+      </Item>
+      <Item
+        hidden={({ props }) => {
+          return props.is_dir || ext(props.name) != "html"
+        }}
+        onClick={({ props }) => {
+          if (!props.is_dir) {
+            window.open(rawLinksText())
+          }
+        }}
+      >
+        <ItemContent name="open_new_tab" />
       </Item>
       <Submenu
         hidden={({ props }) => {

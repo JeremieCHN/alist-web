@@ -9,6 +9,7 @@ import { AiOutlineCloudDownload } from "solid-icons/ai"
 import { ImMoveUp } from "solid-icons/im"
 import { BiRegularRename } from "solid-icons/bi"
 import { HiOutlineFolderRemove } from "solid-icons/hi"
+import { FiExternalLink } from 'solid-icons/fi'
 
 interface Operations {
   [key: string]: {
@@ -30,6 +31,7 @@ export const operations: Operations = {
   new_file: { icon: CgFileAdd, p: true },
   cancel_select: { icon: TiDeleteOutline },
   download: { icon: AiOutlineCloudDownload, color: "$primary9" },
+  open_new_tab: { icon: FiExternalLink, color: "$primary9" },
 }
 // interface Operation {
 //   label: string;
